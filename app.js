@@ -21,12 +21,13 @@ app.post("/weather", (req,res) => {
     const cityName = req.body.cityName;
     const appKey = process.env.API_KEY;
     const unit = "metric";
-    const url = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName +"&appid=" +appKey+ "&units=" + unit;
+    const url = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName +"&appid=" +`b9a6ed5c83e5a458885a6157d77f1e6e`+ "&units=" + unit;
     https.get(url, (response) => {
         console.log(response.statusCode);
 
         response.on("data", (data) => {
             weatherData = JSON.parse(data);
+            console.log(weatherData);
             temperature = weatherData.main.temp;
             weatherDescription = weatherData.weather[0].description;
             weatherImage = weatherData.weather[0].icon;
@@ -40,7 +41,6 @@ app.post("/weather", (req,res) => {
                 imageURL: imageURL,
                 weatherHumidity: weatherHumidity 
             });
-            console.log(weatherData);
         });
     });  
 });
